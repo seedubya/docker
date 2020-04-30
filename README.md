@@ -15,3 +15,10 @@
     sudo vi /etc/apt/sources.list
     * add this line:
         deb https://download.docker.com/linux/raspbian/ buster stable
+
+## Useful
+
+* docker container ls -a
+* docker logs samba -f
+* docker stop samba ; docker container rm samba
+
