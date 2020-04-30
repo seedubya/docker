@@ -12,8 +12,8 @@ docker run --detach \
     -p 53:53/udp \
     -p 80:80 \
     -p 443:443 \
-    -v "/home/pi/pihole/etc-pihole/:/etc/pihole/" \
-    -v "/home/pi/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
+    -v "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/" \
+    -v "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
     --dns=127.0.0.1 --dns=1.1.1.1 \
     --name pihole \
     --restart=unless-stopped \
