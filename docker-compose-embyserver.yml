@@ -4,6 +4,7 @@ services:
     container_name: embyserver
     environment:
       - GID: "2"
+      - TZ: "Europe/London"
       - UID: "2"
     image: emby/embyserver_arm32v7:latest
     ports:
