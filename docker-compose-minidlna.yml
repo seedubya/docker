@@ -1,0 +1,14 @@
+version: "3"
+services:
+  minidlna:
+    container_name: minidlna
+    image: fmartingr/minidlna-arm:latest
+    environment:
+      - MINIDLNA_FRIENDLY_NAME: "zebedee - video library"
+      - MINIDLNA_MEDIA_DIR: "V,/video"
+      - MINIDLNA_ROOT_CONTAINER: "V"
+      - TZ: "Europe/London"
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - "/share/video:/video"

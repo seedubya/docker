@@ -1,0 +1,22 @@
+version: "3"
+services:
+  pihole:
+    container_name: pihole
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    environment:
+      - DNS1: "208.67.222.222"
+      - DNS2: "208.67.220.220"
+      - TZ: "Europe/London"
+      - WEBPASSWORD: "yourehavingagiraffe"
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
+      - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"

@@ -11,6 +11,10 @@
     sudo usermod -aG docker pi
 * add the Docker CPG key:
     sudo curl https://download.docker.com/linux/raspbian/gpg | sudo apt-key add -
+* install compose pre-reqs:
+    sudo apt install libffi-dev
+* install docker-compose:
+    sudo pip3 install docker-compose
 
 ## Useful
 

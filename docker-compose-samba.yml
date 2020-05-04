@@ -1,0 +1,31 @@
+version: "3"
+services:
+  samba:
+    container_name: samba
+    environment:
+      - GROUPID: "65534"
+      - NMBD: "yes"
+      - RECYCLE: "N"
+      - SHARE: "music library;/share/music;yes;no;yes;all;none;;Music Library on Zebedee"
+      - SHARE2: "video library;/share/video;yes;no;yes;all;none;;Video Library on Zebedee"
+      - SMB: "1"
+      - TZ: "Europe/London"
+      - USERID: "65534"
+      - WEBPASSWORD: "yourehavingagiraffe"
+      - WORKGROUP: "WORKGROUP"
+    image: dperson/samba:latest
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    read_only: false
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - "/share/music:/share/music"
+      - "/share/video:/share/video"
+
