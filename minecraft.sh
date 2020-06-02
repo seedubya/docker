@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Minecraft server - bedrock
+# Minecraft server
 #
 
 docker run --detach \
@@ -13,5 +13,5 @@ docker run --detach \
     -v "/home/pi/docker_config/minecraft:/data" \
     --name minecraft \
     --restart=unless-stopped \
-    itzg/minecraft:latest
+    itzg/minecraft-server:multiarch
 
