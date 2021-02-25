@@ -11,5 +11,6 @@ docker run --detach \
     -v /home/pi/docker_config/embyserver/programdata:/config \
     -v /share/video:/video \
     --name embyserver \
+    --net=host \
     --restart=unless-stopped \
     emby/embyserver_arm32v7:latest
