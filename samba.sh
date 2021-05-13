@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Build a usable SAMBA docker object for Sonos music hosting.
+# Build a usable SAMBA docker object.
 #
 
 docker run --detach \
@@ -9,14 +9,16 @@ docker run --detach \
     -e GROUPID="65534" \
     -e NMBD="yes" \
     -e RECYCLE="no" \
-    -e SHARE1="video library;/share/video;yes;no;yes;all;none;;Video Library" \
+    -e SHARE1="backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups" \
+    -e SHARE2="media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media" \
     -e SMB="1" \
     -e TZ="Europe/London" \
     -e USERID="65534" \
     -e WORKGROUP="WORKGROUP" \
     -p 139:139 \
     -p 445:445 \
-    -v /share/video:/share/video \
+    -v /mnt/mydisk/Backups:/mnt/mydisk/Backups \
+    -v /mnt/mydisk/Media:/mnt/mydisk/Media \
     --name samba \
     --restart=unless-stopped \
     dperson/samba:latest
