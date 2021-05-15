@@ -14,7 +14,7 @@
 
 docker run --detach \
   -v /etc/localtime:/etc/localtime:ro \
-  -v /home/pi/docker_config/homeassistant/config \
+  -v /home/pi/docker_config/homeassistant/config:/config \
   --name homeassistant \
   --net=host \
   --restart=unless-stopped \
