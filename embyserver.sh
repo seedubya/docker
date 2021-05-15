@@ -9,7 +9,7 @@ docker run --detach \
     -p 8096:8096 \
     -p 8920:8920 \
     -v /home/pi/docker_config/embyserver/programdata:/config \
-    -v /share/video:/video \
+    -v /mnt/mydisk/Media:/video \
     --name embyserver \
     --net=host \
     --restart=unless-stopped \
