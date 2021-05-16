@@ -7,7 +7,6 @@ docker run --detach \
     -e GLOBAL="ntlm auth=yes" \
     -e GLOBAL="server role = standalone server" \
     -e GROUPID="65534" \
-    -e NMBD="yes" \
     -e RECYCLE="no" \
     -e SHARE1="backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups" \
     -e SHARE2="media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media" \
