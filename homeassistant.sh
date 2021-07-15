@@ -4,6 +4,9 @@
 #
 # nicked from https://www.home-assistant.io/installation/raspberrypi
 #
+# update:
+#    docker pull ghcr.io/home-assistant/raspberrypi4-homeassistant:stable
+#
 ##docker run --init -d \
   ##--name homeassistant \
   ##--restart=unless-stopped \
@@ -17,6 +20,6 @@ docker run --detach \
   -v /home/pi/docker_config/homeassistant/config:/config \
   --name homeassistant \
   --net=host \
+  --privileged \
   --restart=unless-stopped \
-  homeassistant/raspberrypi4-homeassistant:stable
-
+  ghcr.io/home-assistant/raspberrypi4-homeassistant:stable
