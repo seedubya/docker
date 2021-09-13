@@ -2,6 +2,12 @@
 #
 # Build a usable pihole container.
 #
+# Update procedure:
+# 1. docker pull pihole/pihole:latest
+# 2. docker stop pihole ; docker container rm pihole
+# 3. ./pihole.sh (this file)
+# 4. remove old image of pihole (docker image ls ; docker image rm <image id>
+#
 
 docker run --detach \
     -e DNS1="208.67.222.222" \
