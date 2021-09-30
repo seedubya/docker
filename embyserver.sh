@@ -2,6 +2,12 @@
 #
 # emby Server in docker.
 #
+# Update procedure:
+# 1. docker pull emby/embyserver_arm32v7
+# 2. docker stop embyserver ; docker container rm embyserver
+# 3. ./embyserver.sh
+# 4.  remove old image of embyserver: (docker image ls ; docker image rm <image id>)
+#
 
 docker run --detach \
     -e GID=2 \
