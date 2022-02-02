@@ -22,4 +22,4 @@ docker run --detach \
     --net=host \
     --privileged \
     --restart=unless-stopped \
-    ghcr.io/linuxserver/plex:arm32v7-latest
+    ghcr.io/linuxserver/plex:arm64v8-latest
