@@ -3,7 +3,7 @@
 # plex Server in docker.
 #
 # Update procedure (TBC):
-# 1. docker pull ghcr.io/linuxserver/plex:arm32v7-latest
+# 1. docker pull ghcr.io/linuxserver/plex:arm64v8-latest
 # 2. docker stop plex ; docker container rm plex
 # 3. ./plex.sh
 # 4.  remove old image of plex: (docker image ls ; docker image rm <image id>)
