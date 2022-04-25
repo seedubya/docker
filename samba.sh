@@ -2,7 +2,12 @@
 #
 # Build a usable SAMBA docker object.
 #
-
+# Rebuild instructions:
+# 1. docker pull dperson/samba:latest
+# 2. docker stop samba ; docker container rm samba
+# 3. ./samba.sh (this file)
+# 4. remove old image of samba (docker image ls ; docker image rm <image id>
+#
 docker run --detach \
     -e GLOBAL="ntlm auth=yes" \
     -e GLOBAL="server role = standalone server" \
