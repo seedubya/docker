@@ -10,10 +10,12 @@
 #
 
 docker run --detach \
-    -e PLEX_CLAIM="claim-ws7K2XP7-zXtZGL4Szcr" \
+    -e ADVERTISE_IP="http://192.168.1.10:32400/" \
+    -e PLEX_CLAIM="claim-9tUqHoq4Gsjxb-CP85Yj" \
     -e PGID=1000 \
     -e PUID=1000 \
     -e TZ="Europe/London" \
+    -e VERSION="docker" \
     -v /home/pi/docker_config/plex/:/config \
     -v /mnt/mydisk/Transcode:/transcode \
     -v /mnt/mydisk/Media/Movies:/movies \
@@ -23,3 +25,4 @@ docker run --detach \
     --privileged \
     --restart=unless-stopped \
     lscr.io/linuxserver/plex:latest
+	
