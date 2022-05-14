@@ -1,0 +1,62 @@
+#
+# docker compose up -d
+#
+version: "3"
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80/tcp
+    environment:
+      - PIHOLE_DNS_1="208.67.222.222"
+      - PIHOLE_DNS_2="208.67.220.220"
+      - FTLCONF_REPLY_ADDR4="192.168.1.10"
+      - TZ='Europe/London'
+      - WEBPASSWORD="NopeJustNope"
+    volumes:
+      - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
+      - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      #- ADVERTISE_IP="http://192.168.1.10:32400/"
+      - PGID=1000
+      - PUID=1000
+      - PLEX_CLAIM="claim-9tUqHoq4Gsjxb-CP85Yj"
+      - TZ="Europe/London"
+      - VERSION="docker"
+    volumes:
+      - /home/pi/docker_config/plex/:/config
+      - /mnt/mydisk/Transcode:/transcode
+      - /mnt/mydisk/Media/Movies:/movies
+      - /mnt/mydisk/Media/TV:/tv
+    restart: unless-stopped
+  samba:
+    image: dperson/samba:latest
+    container_name: samba
+    ports:
+      - 139:139
+      - 445:445
+    environment:
+      - GLOBAL="ntlm auth=yes"
+      - GLOBAL="server role = standalone server"
+      - GROUPID="65534"
+      - RECYCLE="no"
+      - SHARE1=backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups
+      - SHARE2=media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media
+      - SMB="1"
+      - TZ="Europe/London"
+      - USERID="65534"
+      - WORKGROUP="WORKGROUP"
+    volumes:
+      - /mnt/mydisk/Backups:/mnt/mydisk/Backups
+      - /mnt/mydisk/Media:/mnt/mydisk/Media
+    restart: unless-stopped

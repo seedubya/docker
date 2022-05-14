@@ -1,16 +1,10 @@
 # Docker
 
-## Raspberry Pi
+update all containers:
+* docker compose pull	# grab  updated images
+* docker compose up -d	# rebuild containers using updated images
 
-* install docker (from https://docs.docker.com/engine/install/debian/):
-    ```
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-    sudo systemctl enable docker.service
-    sudo systemctl enable containerd.service
-    ```
+
 
 ## Useful
 
