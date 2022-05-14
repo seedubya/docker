@@ -27,7 +27,6 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      #- ADVERTISE_IP="http://192.168.1.10:32400/"
       - PGID=1000
       - PUID=1000
       - PLEX_CLAIM="claim-9tUqHoq4Gsjxb-CP85Yj"
@@ -46,13 +45,10 @@ services:
       - 139:139
       - 445:445
     environment:
-      - GLOBAL="ntlm auth=yes"
-      - GLOBAL="server role = standalone server"
       - GROUPID="65534"
       - RECYCLE="no"
       - SHARE1=backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups
       - SHARE2=media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media
-      - SMB="1"
       - TZ="Europe/London"
       - USERID="65534"
       - WORKGROUP="WORKGROUP"
