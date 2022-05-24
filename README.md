@@ -3,8 +3,7 @@
 update all containers:
 * docker compose pull	# grab  updated images
 * docker compose up -d	# rebuild containers using updated images
-
-
+* docker image prune	# remove unused images...
 
 ## Useful
 
