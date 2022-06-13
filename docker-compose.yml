@@ -20,8 +20,6 @@ services:
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
       - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
-    cap_add:
-      - NET_ADMIN
     restart: unless-stopped
   plex:
     image: lscr.io/linuxserver/plex:latest
