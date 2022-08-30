@@ -14,7 +14,7 @@ services:
       - 53:53/udp
       - 80:80/tcp
     environment:
-      - FTLCONF_REPLY_ADDR4="192.168.1.10"
+      - FTLCONF_LOCAL_IPV4=192.168.1.10
       - TZ='Europe/London'
       - WEBPASSWORD=NopeNopeNope
     volumes:
