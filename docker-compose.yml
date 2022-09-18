@@ -3,6 +3,15 @@
 #
 version: "3"
 services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - /home/pi/docker_config/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
