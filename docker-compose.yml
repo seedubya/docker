@@ -3,15 +3,24 @@
 #
 version: "3"
 services:
-  homeassistant:
-    container_name: homeassistant
-    image: ghcr.io/home-assistant/home-assistant:stable
-    volumes:
-      - /home/pi/docker_config/homeassistant/config:/config
-      - /etc/localtime:/etc/localtime:ro
+  openhab:
+    container_name: openhab
+    image: "openhab/openhab:latest"
     restart: unless-stopped
-    privileged: true
     network_mode: host
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/home/pi/docker_config/openhab/addons:/openhab/addons"
+      - "/home/pi/docker_config/openhab/conf:/openhab/conf"
+      - "/home/pi/docker_config/openhab/userdata:/openhab/userdata"
+    environment:
+      USER_ID: "1000"
+      GROUP_ID: "1000"
+      CRYPTO_POLICY: "unlimited"
+      EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/London"
+      OPENHAB_HTTP_PORT: "8080"
+      OPENHAB_HTTPS_PORT: "8443"
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -23,9 +32,10 @@ services:
       - 53:53/udp
       - 80:80/tcp
     environment:
-      - FTLCONF_LOCAL_IPV4=192.168.1.10
-      - TZ='Europe/London'
-      - WEBPASSWORD=NopeNopeNope
+      FTLCONF_LOCAL_IPV4: "192.168.1.10"
+      TZ: "Europe/London"
+      WEBPASSWORD: "NopeNopeNope"
+    network_mode: host
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
       - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
@@ -35,11 +45,11 @@ services:
     container_name: plex
     network_mode: host
     environment:
-      - PGID=1000
-      - PUID=1000
-      - PLEX_CLAIM="claim-9tUqHoq4Gsjxb-CP85Yj"
-      - TZ="Europe/London"
-      - VERSION="docker"
+      PGID: "1000"
+      PUID: "1000"
+      PLEX_CLAIM: "claim-9tUqHoq4Gsjxb-CP85Yj"
+      TZ: "Europe/London"
+      VERSION: "docker"
     volumes:
       - /home/pi/docker_config/plex/:/config
       - /mnt/mydisk/Transcode:/transcode
@@ -53,13 +63,13 @@ services:
       - 139:139
       - 445:445
     environment:
-      - GROUPID="65534"
-      - RECYCLE="no"
-      - SHARE1=backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups
-      - SHARE2=media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media
-      - TZ="Europe/London"
-      - USERID="65534"
-      - WORKGROUP="WORKGROUP"
+      GROUPID: "65534"
+      RECYCLE: "no"
+      SHARE1: "backups;/mnt/mydisk/Backups;yes;no;yes;all;none;;Backups"
+      SHARE2: "media;/mnt/mydisk/Media;yes;no;yes;all;none;;Media"
+      TZ: "Europe/London"
+      USERID: "65534"
+      WORKGROUP: "WORKGROUP"
     volumes:
       - /mnt/mydisk/Backups:/mnt/mydisk/Backups
       - /mnt/mydisk/Media:/mnt/mydisk/Media
