@@ -4,6 +4,7 @@
 version: "3"
 
 services:
+
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
@@ -16,25 +17,6 @@ services:
       - /home/pi/docker_config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
-
-  ##homebridge:
-    ##container_name: homebridge
-    ##image: oznu/homebridge:latest
-    ##dns:
-      ##- 192.168.1.10
-      ##- 208.67.222.222
-      ##- 208.67.220.220
-    ##environment:
-      ##TZ: "Europe/London"
-      ##HOMEBRIDGE_CONFIG_UI: 1
-    ##ports:
-      ##- "8581:8581"
-      ##- "51028:51028"
-      ##- "51826:51826/tcp"
-      ##- "52100-52200:52100-52200"
-    ##volumes:
-      ##- /home/pi/docker_config/homebridge:/homebridge
-    ##restart: unless-stopped
 
   nginx-pm:
     container_name: nginx-pm
