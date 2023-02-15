@@ -7,7 +7,9 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
-    network_mode: host
+    dns:
+      - 192.168.1.10
+      - 208.67.222.222
     privileged: true
     restart: unless-stopped
     volumes:
@@ -15,15 +17,34 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
 
+  ##homebridge:
+    ##container_name: homebridge
+    ##image: oznu/homebridge:latest
+    ##dns:
+      ##- 192.168.1.10
+      ##- 208.67.222.222
+      ##- 208.67.220.220
+    ##environment:
+      ##TZ: "Europe/London"
+      ##HOMEBRIDGE_CONFIG_UI: 1
+    ##ports:
+      ##- "8581:8581"
+      ##- "51028:51028"
+      ##- "51826:51826/tcp"
+      ##- "52100-52200:52100-52200"
+    ##volumes:
+      ##- /home/pi/docker_config/homebridge:/homebridge
+    ##restart: unless-stopped
+
   nginx-pm:
     container_name: nginx-pm
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     ports:
       # These ports are in format <host-port>:<container-port>
-      - '80:80' # Public HTTP Port
-      - '443:443' # Public HTTPS Port
-      - '81:81' # Admin Web Port
+      - 80:80 # Public HTTP Port
+      - 443:443 # Public HTTPS Port
+      - 81:81 # Admin Web Port
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
     # environment:
@@ -37,8 +58,8 @@ services:
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
 
   pihole:
-    container_name: pihole
     image: pihole/pihole:latest
+    container_name: pihole
     dns:
       - 208.67.222.222
       - 208.67.220.220
