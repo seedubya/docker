@@ -64,10 +64,13 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
+    dns:
+      - 192.168.1.10
+      - 208.67.222.222
     environment:
       PGID: "1000"
       PUID: "1000"
-      PLEX_CLAIM: "claim-9tUqHoq4Gsjxb-CP85Yj"
+      PLEX_CLAIM: "claim-6XFLkWDbjDw8qnuPiTme"
       TZ: "Europe/London"
       VERSION: "docker"
     ports:
