@@ -4,27 +4,29 @@
 version: "3"
 
 services:
-
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     dns:
       - 192.168.1.10
       - 208.67.222.222
-    ##network_mode: host
     ports:
       - 8123:8123
     privileged: true
-    restart: unless-stopped
     volumes:
       - /home/pi/docker_config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
-
+    restart: unless-stopped
   nginx-pm:
     container_name: nginx-pm
     image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
+    # environment:
+      # Uncomment this if you want to change the location of 
+      # the SQLite DB file within the container
+      # DB_SQLITE_FILE: "/data/database.sqlite"
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
     ports:
       # These ports are in format <host-port>:<container-port>
       - 80:80 # Public HTTP Port
@@ -32,38 +34,31 @@ services:
       - 81:81 # Admin Web Port
       # Add any other Stream port you want to expose
       # - '21:21' # FTP
-    # environment:
-      # Uncomment this if you want to change the location of 
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
-      # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
     volumes:
       - /home/pi/docker_config/nginx-pm/data:/data
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
-
+    restart: unless-stopped
   pihole:
-    image: pihole/pihole:latest
     container_name: pihole
+    image: pihole/pihole:latest
     dns:
       - 208.67.222.222
       - 208.67.220.220
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
-      - 8080:80/tcp
     environment:
       FTLCONF_LOCAL_IPV4: "192.168.1.10"
       TZ: "Europe/London"
       WEBPASSWORD: "Nope"
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8080:80/tcp
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
       - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
     restart: unless-stopped
-
   plex:
-    image: lscr.io/linuxserver/plex:latest
     container_name: plex
+    image: lscr.io/linuxserver/plex:latest
     dns:
       - 192.168.1.10
       - 208.67.222.222
@@ -89,13 +84,9 @@ services:
       - /mnt/mydisk/Media/Movies:/movies
       - /mnt/mydisk/Media/TV:/tv
     restart: unless-stopped
-
   samba:
-    image: dperson/samba:latest
     container_name: samba
-    ports:
-      - 139:139
-      - 445:445
+    image: dperson/samba:latest
     environment:
       GROUPID: "65534"
       RECYCLE: "no"
@@ -104,11 +95,13 @@ services:
       TZ: "Europe/London"
       USERID: "65534"
       WORKGROUP: "WORKGROUP"
+    ports:
+      - 139:139
+      - 445:445
     volumes:
       - /mnt/mydisk/Backups:/mnt/mydisk/Backups
       - /mnt/mydisk/Media:/mnt/mydisk/Media
     restart: unless-stopped
-
 networks:
   default:
     external: true
