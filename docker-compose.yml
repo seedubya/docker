@@ -95,7 +95,7 @@ services:
       - 9443:9443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/pi/docker_config/portainer_data:/data
+      - /home/pi/docker_config/portainer:/data
     restart: unless-stopped
   samba:
     container_name: samba
