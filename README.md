@@ -13,3 +13,5 @@ update all containers:
 * docker logs samba -f
 * docker stop samba ; docker container rm samba
 
+* docker volume ls -qf dangling=true				# list orphaned (dangling) volumes
+* docker volume rm $( docker volume ls -qf dangling=true )	# remove dangling volumes
