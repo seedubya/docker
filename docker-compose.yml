@@ -68,7 +68,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      PLEX_CLAIM: "claim-6XFLkWDbjDw8qnuPiTme"
+      PLEX_CLAIM: "claim-UuHeAvmwxZ1i6JSoWS3_"
       TZ: "Europe/London"
       VERSION: "docker"
     ports:
@@ -86,19 +86,6 @@ services:
       - /mnt/mydisk/Transcode:/transcode
       - /mnt/mydisk/Media/Movies:/movies
       - /mnt/mydisk/Media/TV:/tv
-    restart: unless-stopped
-  portainer:
-    container_name: portainer
-    image: portainer/portainer-ce:latest
-    dns:
-      - 192.168.1.10
-      - 208.67.222.222
-    ports:
-      - 8000:8000
-      - 9443:9443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /home/pi/docker_config/portainer:/data
     restart: unless-stopped
   samba:
     container_name: samba
