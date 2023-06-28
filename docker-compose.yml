@@ -18,6 +18,24 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
+  ##minecraft:
+    ##container_name: minecraft
+    ##image: itzg/minecraft-bedrock-server:latest
+    ##dns:
+      ##- 192.168.1.10
+      ##- 208.67.222.222
+    ##environment:
+      ##DIFFICULTY: normal
+      ##EULA: "TRUE"
+      ##GAMEMODE: survival
+      ##SERVER_NAME: "Daddy's minecraft server"
+      ##TZ: "Europe/London"
+      ##VERSION: LATEST
+    ##ports:
+      ##- 19132:19132/udp
+    ##volumes:
+      ##- /home/pi/docker_config/minecraft/data:/data
+    ##restart: unless-stopped
   nginx-pm:
     container_name: nginx-pm
     image: 'jc21/nginx-proxy-manager:latest'
