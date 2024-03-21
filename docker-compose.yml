@@ -4,6 +4,22 @@
 version: "3"
 
 services:
+  step-ca:
+    container_name: step-ca
+    image: "smallstep/step-ca:latest"
+    dns:
+      - 192.168.1.10
+      - 208.67.222.222
+    environment:
+      DOCKER_STEPCA_INIT_NAME: "Zen CA"
+      DOCKER_STEPCA_INIT_DNS_NAMES: "192.168.1.10,mercury"
+      DOCKER_STEPCA_INIT_PASSWORD_FILE: "/home/step/secrets/password"
+      DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: "true"
+    ports:
+      - 9000:9000
+    volumes:
+      - /home/pi/docker_config/step-ca:/home/step
+    restart: unless-stopped
   homeassistant:
     container_name: homeassistant
     image: "homeassistant/home-assistant:latest"
@@ -42,12 +58,6 @@ services:
     dns:
       - 192.168.1.10
       - 208.67.222.222
-    # environment:
-      # Uncomment this if you want to change the location of 
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
-      # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
     ports:
       # These ports are in format <host-port>:<container-port>
       - 80:80 # Public HTTP Port
