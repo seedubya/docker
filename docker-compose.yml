@@ -12,7 +12,7 @@ services:
       - 208.67.222.222
     environment:
       DOCKER_STEPCA_INIT_NAME: "Zen CA"
-      DOCKER_STEPCA_INIT_DNS_NAMES: "192.168.1.10,mercury"
+      DOCKER_STEPCA_INIT_DNS_NAMES: "192.168.1.10,mercury,localhost"
       DOCKER_STEPCA_INIT_PASSWORD_FILE: "/home/step/secrets/password"
       DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: "true"
     ports:
