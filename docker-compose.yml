@@ -4,22 +4,6 @@
 version: "3"
 
 services:
-  step-ca:
-    container_name: step-ca
-    image: "smallstep/step-ca:latest"
-    dns:
-      - 192.168.1.10
-      - 208.67.222.222
-    environment:
-      DOCKER_STEPCA_INIT_NAME: "Zen CA"
-      DOCKER_STEPCA_INIT_DNS_NAMES: "192.168.1.10,mercury,localhost"
-      DOCKER_STEPCA_INIT_PASSWORD_FILE: "/home/step/secrets/password"
-      DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: "true"
-    ports:
-      - 9000:9000
-    volumes:
-      - /home/pi/docker_config/step-ca:/home/step
-    restart: unless-stopped
   homeassistant:
     container_name: homeassistant
     image: "homeassistant/home-assistant:latest"
@@ -78,7 +62,7 @@ services:
     environment:
       FTLCONF_LOCAL_IPV4: "192.168.1.10"
       TZ: "Europe/London"
-      WEBPASSWORD: "Nope"
+      WEBPASSWORD: "F1reblade"
     ports:
       - 53:53/tcp
       - 53:53/udp
@@ -133,6 +117,22 @@ services:
       - /mnt/mydisk/Backups:/mnt/mydisk/Backups
       - /mnt/mydisk/Media:/mnt/mydisk/Media
     restart: unless-stopped
+  ##step-ca:
+    ##container_name: step-ca
+    ##image: "smallstep/step-ca:latest"
+    ##dns:
+      ##- 192.168.1.10
+      ##- 208.67.222.222
+    ##environment:
+      ##DOCKER_STEPCA_INIT_NAME: "Zen CA"
+      ##DOCKER_STEPCA_INIT_DNS_NAMES: "192.168.1.10,mercury,localhost"
+      ##DOCKER_STEPCA_INIT_PASSWORD_FILE: "/home/step/secrets/password"
+      ##DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: "true"
+    ##ports:
+      ##- 9000:9000
+    ##volumes:
+      ##- /home/pi/docker_config/step-ca:/home/step
+    ##restart: unless-stopped
 networks:
   default:
     external: true
