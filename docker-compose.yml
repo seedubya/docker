@@ -1,7 +1,7 @@
 #
 # docker compose up -d
 #
-version: "3"
+# version: "3"
 
 services:
   homeassistant:
@@ -62,7 +62,7 @@ services:
     environment:
       FTLCONF_LOCAL_IPV4: "192.168.1.10"
       TZ: "Europe/London"
-      WEBPASSWORD: "F1reblade"
+      WEBPASSWORD: "N0Pe"
     ports:
       - 53:53/tcp
       - 53:53/udp
