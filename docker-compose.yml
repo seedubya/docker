@@ -18,24 +18,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/docker_config/nginx-pm/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
-  ##minecraft:
-    ##container_name: minecraft
-    ##image: itzg/minecraft-bedrock-server:latest
-    ##dns:
-      ##- 192.168.1.10
-      ##- 208.67.222.222
-    ##environment:
-      ##DIFFICULTY: normal
-      ##EULA: "TRUE"
-      ##GAMEMODE: survival
-      ##SERVER_NAME: "Daddy's minecraft server"
-      ##TZ: "Europe/London"
-      ##VERSION: LATEST
-    ##ports:
-      ##- 19132:19132/udp
-    ##volumes:
-      ##- /home/pi/docker_config/minecraft/data:/data
-    ##restart: unless-stopped
   nginx-pm:
     container_name: nginx-pm
     image: 'jc21/nginx-proxy-manager:latest'
@@ -56,17 +38,15 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    dns:
-      - 208.67.222.222
-      - 208.67.220.220
     environment:
-      FTLCONF_LOCAL_IPV4: "192.168.1.10"
       TZ: "Europe/London"
-      WEBPASSWORD: "N0Pe"
+      FTLCONF_webserver_api_password: "Nope"
+      FTLCONF_dns_upstreams: 208.67.222.222;208.67.220.220
     ports:
       - 53:53/tcp
       - 53:53/udp
       - 8080:80/tcp
+      - 8443:443/tcp
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
       - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
