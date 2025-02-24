@@ -46,10 +46,10 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 8080:80/tcp
-      - 8443:443/tcp
+      #- 8443:443/tcp
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
-      - "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+      ##- "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
     restart: unless-stopped
   plex:
     container_name: plex
