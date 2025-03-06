@@ -41,12 +41,13 @@ services:
     environment:
       TZ: "Europe/London"
       FTLCONF_webserver_api_password: "Nope"
+      FTLCONF_dns_listeningMode: 'all'
       FTLCONF_dns_upstreams: 208.67.222.222;208.67.220.220
     ports:
       - 53:53/tcp
       - 53:53/udp
       - 8080:80/tcp
-      #- 8443:443/tcp
+      - 8083:443/tcp
     volumes:
       - "/home/pi/docker_config/pihole/etc-pihole/:/etc/pihole/"
       ##- "/home/pi/docker_config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
